@@ -99,6 +99,19 @@ export function createLivePreview(
   const shadowRoot = shadowHost.attachShadow
     ? shadowHost.attachShadow({ mode: 'open' })
     : null;
+  if (shadowRoot && typeof CSSStyleSheet !== 'undefined') {
+    const previewSheet = new CSSStyleSheet();
+    previewSheet.replaceSync(`
+${PREVIEW_SHELL_STYLESHEET}
+.inline-html-preview-shell {
+  margin: 0 auto;
+  padding: 20px 18px;
+  box-shadow: none;
+  min-height: 60px;
+}
+`);
+    shadowRoot.adoptedStyleSheets = [previewSheet];
+  }
 
   // HTML 源码预览面板
   const sourcePanel = container.createDiv({ cls: 'inline-html-source-panel' });
@@ -137,15 +150,6 @@ export function createLivePreview(
     commentOnlyHint.toggleClass('is-hidden', !isCommentOnly);
 
     // 3. 更新隔离预览视图
-    const previewStyleCss = `
-${PREVIEW_SHELL_STYLESHEET}
-.inline-html-preview-shell {
-  margin: 0 auto;
-  padding: 20px 18px;
-  box-shadow: none;
-  min-height: 60px;
-}
-`;
     const parsedDoc = new DOMParser().parseFromString(
       result.sectionsHtml,
       'text/html',
@@ -156,9 +160,7 @@ ${PREVIEW_SHELL_STYLESHEET}
       shellEl.appendChild(document.importNode(child, true));
     }
     if (shadowRoot) {
-      const styleEl = shadowHost.createEl('style', { text: previewStyleCss });
-      styleEl.remove();
-      shadowRoot.replaceChildren(styleEl, shellEl);
+      shadowRoot.replaceChildren(shellEl);
     } else {
       shadowHost.replaceChildren(shellEl);
     }
