@@ -1,0 +1,17 @@
+# Obsidian local plugin runtime config (never commit user settings)
+data.json
+
+# Compiled plugin bundle (attach main.js to GitHub Releases instead of committing to branch)
+main.js
+*.js.map
+
+# Dependencies
+node_modules/
+coverage/
+
+# Editor & OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

@@ -1,0 +1,639 @@
+/* Inline HTML 插件设置页与弹窗样式（严格限定作用域，不污染 Obsidian 全局及导出 HTML） */
+
+.inline-html-settings {
+  padding-bottom: 40px;
+}
+
+.inline-html-settings .is-hidden,
+.inline-html-modal .is-hidden {
+  display: none !important;
+}
+
+.inline-html-page-header {
+  margin-bottom: 16px;
+}
+
+.inline-html-settings .inline-html-page-header h2 {
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0 0 8px 0;
+  padding: 0;
+  border: none;
+  text-align: left;
+  text-indent: 0;
+}
+
+.inline-html-settings .inline-html-page-desc {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-indent: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.inline-html-card {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.inline-html-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.inline-html-card-title-wrap {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inline-html-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.inline-html-card-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.inline-html-dirty-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-warning);
+  background: rgba(233, 151, 63, 0.14);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* 导出设置 */
+.inline-html-export-mode-row,
+.inline-html-export-path-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.inline-html-export-path-row.is-disabled {
+  opacity: 0.55;
+}
+
+.inline-html-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.inline-html-export-path-input {
+  flex: 1;
+  min-width: 260px;
+}
+
+/* 预设栏（首行：当前预设+保存 | 右对齐导入导出JSON组；次行：新建/复制/重命名/删除） */
+.inline-html-preset-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.inline-html-preset-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  width: 100%;
+}
+
+.inline-html-preset-main-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.inline-html-preset-main-group > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.inline-html-preset-io-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 16px;
+  margin-left: auto;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.inline-html-preset-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.inline-html-preset-row > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.inline-html-preset-select {
+  min-width: 140px;
+  max-width: 260px;
+  flex-shrink: 1;
+}
+
+.inline-html-text-link {
+  display: inline-block;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.inline-html-text-link:hover,
+.inline-html-text-link:focus-visible {
+  color: var(--interactive-accent);
+}
+
+.inline-html-field-label {
+  font-size: 13px;
+  color: var(--text-normal);
+  font-weight: 500;
+}
+
+.inline-html-btn-sm {
+  font-size: 12px;
+  padding: 4px 10px;
+  height: 28px;
+}
+
+.inline-html-btn-danger:not(:disabled):hover {
+  background-color: var(--background-modifier-error);
+  color: var(--text-on-accent);
+}
+
+/* 变量表 */
+.inline-html-var-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inline-html-var-head,
+.inline-html-var-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 1.1fr) minmax(100px, 0.9fr) minmax(160px, 1.8fr) 74px 62px;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-html-var-head {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 0 2px 4px 2px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.inline-html-var-name-input.is-invalid {
+  border-color: var(--text-error) !important;
+}
+
+.inline-html-var-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  cursor: pointer;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inline-html-var-badge:hover {
+  border-color: var(--interactive-accent);
+  color: var(--interactive-accent);
+}
+
+.inline-html-var-color-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline-html-color-picker {
+  width: 34px;
+  height: 26px;
+  padding: 1px;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  cursor: pointer;
+  background: transparent;
+}
+
+.inline-html-non-color-hint {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.inline-html-empty-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 8px 2px;
+}
+
+/* 双栏核心工作台 */
+.inline-html-workbench {
+  display: grid;
+  grid-template-columns: minmax(380px, 1.08fr) minmax(340px, 0.92fr);
+  gap: 14px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .inline-html-workbench {
+    grid-template-columns: 1fr;
+  }
+}
+
+.inline-html-workbench-right {
+  position: sticky;
+  top: 12px;
+}
+
+/* 二级分组元素导航（按钮等宽平分整个块宽度） */
+.inline-html-element-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.inline-html-element-nav-primary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+}
+
+.inline-html-element-nav-sub {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+  background: var(--background-primary);
+  border-radius: 6px;
+}
+
+.inline-html-nav-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  font-size: 12px;
+  padding: 5px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inline-html-nav-sub-tab {
+  font-size: 11.5px;
+  padding: 4px 6px;
+}
+
+.inline-html-nav-tab.is-active,
+.inline-html-preview-toolbar button.is-active {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
+
+.inline-html-element-heading {
+  margin-bottom: 10px;
+}
+
+.inline-html-element-heading-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* 输出控制卡片 */
+.inline-html-output-control-box {
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.inline-html-sub-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.inline-html-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.inline-html-checkbox-row label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.inline-html-blank-lines-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 12.5px;
+}
+
+.inline-html-blank-lines-inputs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.inline-html-inline-number-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inline-html-number-input {
+  width: 68px;
+  text-align: center;
+}
+
+.inline-html-list-symbol-box {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--background-modifier-border);
+}
+
+.inline-html-list-symbol-expanded {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+}
+
+.inline-html-form-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inline-html-nowrap-row {
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.inline-html-nowrap-row .inline-html-field-label {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.inline-html-short-text-input {
+  width: 96px;
+}
+
+.inline-html-tiny-text-input {
+  width: 72px;
+}
+
+.inline-html-ordered-select {
+  min-width: 145px;
+}
+
+.inline-html-hint-text {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* 样式编辑与锁定态 */
+.inline-html-style-area.is-locked {
+  opacity: 0.62;
+}
+
+.inline-html-style-area.is-locked input,
+.inline-html-style-area.is-locked textarea {
+  cursor: not-allowed;
+}
+
+.inline-html-lock-banner {
+  font-size: 12px;
+  color: var(--text-warning);
+  background: rgba(233, 151, 63, 0.12);
+  border: 1px solid rgba(233, 151, 63, 0.35);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+}
+
+.inline-html-css-group {
+  margin-bottom: 12px;
+}
+
+.inline-html-css-label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.inline-html-css-label-row code {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.inline-html-css-textarea {
+  width: 100%;
+  font-family: var(--font-monospace);
+  font-size: 12.5px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.inline-html-inline-style-row {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.inline-html-inline-style-label {
+  font-size: 12.5px;
+  color: var(--text-normal);
+}
+
+.inline-html-inline-css-input {
+  width: 100%;
+  font-family: var(--font-monospace);
+  font-size: 12.5px;
+}
+
+/* 分割线 4 参数面板 */
+.inline-html-divider-panel {
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.inline-html-divider-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.inline-html-divider-label {
+  font-size: 13px;
+}
+
+.inline-html-divider-control-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-html-unit-suffix {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* 实时预览区 */
+.inline-html-preview-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.inline-html-preview-warning {
+  font-size: 12px;
+  color: var(--text-error);
+  background: rgba(224, 82, 82, 0.12);
+  border: 1px solid rgba(224, 82, 82, 0.35);
+  border-radius: 6px;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+}
+
+.inline-html-comment-only-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--background-primary);
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.inline-html-render-viewport {
+  background: #f5f5f5;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 10px;
+  max-height: 380px;
+  overflow: auto;
+}
+
+.inline-html-source-panel {
+  margin-top: 12px;
+}
+
+.inline-html-source-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.inline-html-source-pre {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  max-height: 300px;
+  overflow: auto;
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  line-height: 1.6;
+  tab-size: 2;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* 弹窗样式 */
+.inline-html-modal-error {
+  color: var(--text-error);
+  font-size: 12px;
+  margin: 6px 0;
+}
+
+.inline-html-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
