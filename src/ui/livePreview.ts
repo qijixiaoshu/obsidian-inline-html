@@ -146,10 +146,21 @@ ${PREVIEW_SHELL_STYLESHEET}
   min-height: 60px;
 }
 `;
+    const parsedDoc = new DOMParser().parseFromString(
+      result.sectionsHtml,
+      'text/html',
+    );
+    const shellEl = shadowHost.createDiv({ cls: 'inline-html-preview-shell' });
+    shellEl.remove();
+    for (const child of Array.from(parsedDoc.body.childNodes)) {
+      shellEl.appendChild(document.importNode(child, true));
+    }
     if (shadowRoot) {
-      shadowRoot.innerHTML = `<style>${previewStyleCss}</style><div class="inline-html-preview-shell">${result.sectionsHtml}</div>`;
+      const styleEl = shadowHost.createEl('style', { text: previewStyleCss });
+      styleEl.remove();
+      shadowRoot.replaceChildren(styleEl, shellEl);
     } else {
-      shadowHost.innerHTML = `<div class="inline-html-preview-shell">${result.sectionsHtml}</div>`;
+      shadowHost.replaceChildren(shellEl);
     }
 
     // 4. 更新源码区（展开嵌套层级，使 section / p / span 结构清晰分明）

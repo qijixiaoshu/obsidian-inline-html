@@ -4,11 +4,11 @@ import remarkGfm from 'remark-gfm';
 import remarkFrontmatter from 'remark-frontmatter';
 import type {
   Blockquote,
-  Content,
   List,
   Paragraph,
   PhrasingContent,
   Root,
+  RootContent,
   Table,
 } from 'mdast';
 import type {
@@ -64,7 +64,7 @@ export function parseMarkdownToIr(markdown: string): DocumentBlockNode[] {
 
   // 预处理独立跨行 $$...$$ 公式块，确保即使内部有空行也不会被拆成多个普通段落
   const normalizedMd = preprocessMultilineMathBlocks(markdown);
-  const tree = processor.parse(normalizedMd) as Root;
+  const tree: Root = processor.parse(normalizedMd);
   const blocks: DocumentBlockNode[] = [];
 
   for (const node of tree.children) {
@@ -133,7 +133,7 @@ function preprocessMultilineMathBlocks(src: string): string {
   return out.join('\n');
 }
 
-function sliceNodeSource(node: Content, source: string): string {
+function sliceNodeSource(node: RootContent, source: string): string {
   const start = node.position?.start.offset;
   const end = node.position?.end.offset;
   if (typeof start === 'number' && typeof end === 'number') {
@@ -143,7 +143,7 @@ function sliceNodeSource(node: Content, source: string): string {
 }
 
 function processBlockNode(
-  node: Content,
+  node: RootContent,
   source: string,
   out: DocumentBlockNode[],
 ): void {
@@ -549,7 +549,7 @@ function extractPhrasingPlainText(
   return extractPlainTextFromRuns(parsePhrasingToRuns(nodes, source));
 }
 
-function extractNodePlainText(node: Content, source: string): string {
+function extractNodePlainText(node: RootContent, source: string): string {
   switch (node.type) {
     case 'paragraph':
     case 'heading':

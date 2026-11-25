@@ -4,34 +4,6 @@
   padding-bottom: 40px;
 }
 
-.inline-html-settings .is-hidden,
-.inline-html-modal .is-hidden {
-  display: none !important;
-}
-
-.inline-html-page-header {
-  margin-bottom: 16px;
-}
-
-.inline-html-settings .inline-html-page-header h2 {
-  font-size: 24px;
-  line-height: 1.2;
-  margin: 0 0 8px 0;
-  padding: 0;
-  border: none;
-  text-align: left;
-  text-indent: 0;
-}
-
-.inline-html-settings .inline-html-page-desc {
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  text-indent: 0;
-  color: var(--text-muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
 
 .inline-html-card {
   background-color: var(--background-secondary);
@@ -165,12 +137,12 @@
   flex-shrink: 1;
 }
 
-.inline-html-text-link {
+.inline-html-settings .inline-html-preset-io-group .inline-html-text-link {
   display: inline-block;
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
   font-size: 13px;
   color: var(--text-muted);
   text-decoration: underline;
@@ -179,8 +151,8 @@
   user-select: none;
 }
 
-.inline-html-text-link:hover,
-.inline-html-text-link:focus-visible {
+.inline-html-settings .inline-html-preset-io-group .inline-html-text-link:hover,
+.inline-html-settings .inline-html-preset-io-group .inline-html-text-link:focus-visible {
   color: var(--interactive-accent);
 }
 
@@ -223,8 +195,8 @@
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.inline-html-var-name-input.is-invalid {
-  border-color: var(--text-error) !important;
+.inline-html-settings .inline-html-var-row input.inline-html-var-name-input.is-invalid {
+  border-color: var(--text-error);
 }
 
 .inline-html-var-badge {
@@ -636,4 +608,11 @@
   justify-content: flex-end;
   gap: 8px;
   margin-top: 16px;
+}
+
+
+/* 通用隐藏状态（置于末尾并通过双类选择器提升优先级） */
+.inline-html-settings .is-hidden.is-hidden,
+.inline-html-modal .is-hidden.is-hidden {
+  display: none;
 }

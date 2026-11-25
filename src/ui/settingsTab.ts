@@ -1,4 +1,4 @@
-import { App, Notice, PluginSettingTab } from 'obsidian';
+import { App, Notice, PluginSettingTab, Setting } from 'obsidian';
 import type InlineHtmlPlugin from '../main';
 import type { BlockElementType, StylePreset } from '../types/settings';
 import {
@@ -43,12 +43,10 @@ export class InlineHtmlSettingTab extends PluginSettingTab {
       this.draftPreset = clonePreset(this.plugin.getActivePreset());
     }
 
-    const pageHeader = containerEl.createDiv({ cls: 'inline-html-page-header' });
-    pageHeader.createEl('h2', { text: 'Inline HTML 设置' });
-    pageHeader.createEl('p', {
-      cls: 'inline-html-page-desc',
-      text: '按自定义内联 CSS 与样式预设将 Markdown 导出为完整 HTML 文档。',
-    });
+    new Setting(containerEl)
+      .setName('排版与导出工作台')
+      .setDesc('按自定义内联 CSS 与样式预设将 Markdown 导出为完整 HTML 文档。')
+      .setHeading();
 
     // 1. 导出路径设置卡片（全局立即持久化）
     this.renderExportLocationCard(containerEl);
@@ -308,13 +306,12 @@ export class InlineHtmlSettingTab extends PluginSettingTab {
       type: 'application/json;charset=utf-8',
     });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.body.createEl('a');
     const safeFileName = this.draftPreset.name.replace(/[\\/:*?"<>|]/g, '_');
     a.href = url;
     a.download = `${safeFileName || 'preset'}.inline-html-preset.json`;
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    a.remove();
     URL.revokeObjectURL(url);
     new Notice(`✅ 已导出预设 JSON：「${this.draftPreset.name}」`);
   }

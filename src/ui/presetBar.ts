@@ -84,7 +84,7 @@ export function renderPresetBar(
     fileInput.value = '';
   });
 
-  const importLink = ioGroup.createEl('span', {
+  const importLink = ioGroup.createSpan({
     text: '导入 JSON',
     cls: 'inline-html-text-link',
   });
@@ -98,7 +98,7 @@ export function renderPresetBar(
     }
   });
 
-  const exportLink = ioGroup.createEl('span', {
+  const exportLink = ioGroup.createSpan({
     text: '导出 JSON',
     cls: 'inline-html-text-link',
   });

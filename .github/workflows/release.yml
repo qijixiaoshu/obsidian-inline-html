@@ -1,0 +1,56 @@
+name: Release Obsidian Plugin
+
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Build plugin
+        run: npm run build
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: |
+            main.js
+            manifest.json
+            styles.css
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Inline HTML ${{ github.ref_name }}
+          generate_release_notes: true
+          body: |
+            Release ${{ github.ref_name }} of Inline HTML.
+          files: |
+            main.js
+            manifest.json
+            styles.css
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 {
   "name": "inline-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Export Markdown notes as standalone HTML documents with customizable inline CSS styles and presets for publishing platforms.",
   "main": "main.js",
   "author": "qijixiaoshu",

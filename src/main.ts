@@ -70,7 +70,7 @@ export default class InlineHtmlPlugin extends Plugin {
   }
 
   async loadSettings(): Promise<void> {
-    const raw = await this.loadData();
+    const raw: unknown = await this.loadData();
     this.settings = normalizeSettings(raw);
   }
 
